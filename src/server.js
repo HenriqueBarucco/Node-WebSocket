@@ -14,7 +14,7 @@ app.use(express.static(publicDir));
 
 const httpServer = http.createServer(app);
 
-httpServer.listen(port, () => console.log(`Servidor escutando na porta ${port}`))
+httpServer.listen(port, () => console.log(`Servidor escutando na porta ${port}!`))
 
 const io = new Server(httpServer);
 

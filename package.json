@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/socket-back.js",
+    "dev": "nodemon -L --inspect=0.0.0.0 src/socket-back.js",
     "lint": "eslint src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
