@@ -1,22 +1,22 @@
 {
-  "name": "node-websocket",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "dev": "nodemon -L --inspect=0.0.0.0 src/socket-back.js",
-    "lint": "eslint src --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "socket.io": "^4.6.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
-  }
+    "name": "node-websocket",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon -L --inspect=0.0.0.0 src/socket-back.js",
+        "lint": "eslint src --fix",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2",
+        "socket.io": "^4.6.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.20"
+    }
 }
