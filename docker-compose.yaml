@@ -6,6 +6,9 @@ services:
         user: 'node'
         restart: unless-stopped
         command: 'npm run dev'
+        env_file: .env
+        environment:
+            - STRING_DB=${STRING_DB}
         ports:
             - 3000:3000
         volumes:
