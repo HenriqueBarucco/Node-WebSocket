@@ -1,10 +1,10 @@
-import { refrashEditorText } from "./documento.js";
+import { alertAndRedirect, refreshEditorText } from "./documento.js";
 
 const socket = io();
 
 function selectDocument(name) {
     socket.emit("selecionar_documento", name, (text) => {
-        refrashEditorText(text);
+        refreshEditorText(text);
     });
 }
 
@@ -13,7 +13,15 @@ function emitEditorText(dados) {
 }
 
 socket.on("texto_editor_clientes", (text) => {
-    refrashEditorText(text);
+    refreshEditorText(text);
 });
 
-export { emitEditorText, selectDocument };
+function emitRemoveDocument(name) {
+    socket.emit("excluir_documento", name);
+}
+
+socket.on("excluir_documento_sucesso", (name) => {
+    alertAndRedirect(name);
+});
+
+export { emitEditorText, selectDocument, emitRemoveDocument };

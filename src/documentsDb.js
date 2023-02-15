@@ -1,5 +1,17 @@
 import { documentsCollection } from "./dbConnect.js";
 
+function getDocuments() {
+    return documentsCollection.find().toArray();
+}
+
+function addDocument(name) {
+    const res = documentsCollection.insertOne({
+        name,
+        text: "",
+    });
+    return res;
+}
+
 function findDocument(name) {
     const document = documentsCollection.findOne({ name });
 
@@ -21,4 +33,18 @@ function editDocument(name, text) {
     return att;
 }
 
-export { findDocument, editDocument };
+function removeDocument(name) {
+    const res = documentsCollection.deleteOne({
+        name,
+    });
+
+    return res;
+}
+
+export {
+    findDocument,
+    editDocument,
+    getDocuments,
+    addDocument,
+    removeDocument,
+};
