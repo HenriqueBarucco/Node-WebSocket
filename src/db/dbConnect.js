@@ -2,17 +2,18 @@ import { MongoClient } from "mongodb";
 
 const client = new MongoClient(process.env.STRING_DB);
 
-let documentsCollection;
+let documentosColecao, usuariosColecao;
 
 try {
     await client.connect();
 
     const db = client.db("alura-websockets");
-    documentsCollection = db.collection("documentos");
+    documentosColecao = db.collection("documentos");
+    usuariosColecao = db.collection("usuarios");
 
     console.log("Conectado ao banco de dados com sucesso!");
-} catch (error) {
-    console.log(error);
+} catch (erro) {
+    console.log(erro);
 }
 
-export { documentsCollection };
+export { documentosColecao, usuariosColecao };

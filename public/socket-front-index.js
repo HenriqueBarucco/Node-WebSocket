@@ -1,27 +1,27 @@
-import { insertLinkDocument, removeLinkDocument } from "./index.js";
+import { inserirLinkDocumento, removerLinkDocumento } from "./index.js";
 
 const socket = io();
 
-socket.emit("obter_documentos", (documents) => {
-    documents.forEach((document) => {
-        insertLinkDocument(document.name);
+socket.emit("obter_documentos", (documentos) => {
+    documentos.forEach((documento) => {
+        inserirLinkDocumento(documento.nome);
     });
 });
 
-function emitAddDocument(name) {
-    socket.emit("adicionar_documento", name);
+function emitirAdicionarDocumento(nome) {
+    socket.emit("adicionar_documento", nome);
 }
 
-socket.on("adicionar_documento_interface", (name) => {
-    insertLinkDocument(name);
+socket.on("adicionar_documento_interface", (nome) => {
+    inserirLinkDocumento(nome);
 });
 
-socket.on("documento_existente", (name) => {
-    alert(`O documento ${name} já existe`);
+socket.on("documento_existente", (nome) => {
+    alert(`O documento ${nome} já existe!`);
 });
 
-socket.on("excluir_documento.sucesso", (name) => {
-    removeLinkDocument(name);
+socket.on("excluir_documento_sucesso", (nome) => {
+    removerLinkDocumento(nome);
 });
 
-export { emitAddDocument };
+export { emitirAdicionarDocumento };
