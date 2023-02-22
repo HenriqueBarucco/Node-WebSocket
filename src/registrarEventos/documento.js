@@ -3,17 +3,34 @@ import {
     encontrarDocumento,
     excluirDocumento,
 } from "../db/documentosDb.js";
+import {
+    adicionarConexao,
+    obterUsuariosDocumento,
+} from "../utils/conexoesDocumentos.js";
 
-function registrarEventosDocumentos(socket, io) {
-    socket.on("selecionar_documento", async (nomeDocumento, devolverTexto) => {
-        socket.join(nomeDocumento);
+function registrarEventosDocumento(socket, io) {
+    socket.on(
+        "selecionar_documento",
+        async ({ nomeDocumento, nomeUsuario }, devolverTexto) => {
+            const documento = await encontrarDocumento(nomeDocumento);
 
-        const documento = await encontrarDocumento(nomeDocumento);
+            if (documento) {
+                socket.join(nomeDocumento);
 
-        if (documento) {
-            devolverTexto(documento.texto);
+                adicionarConexao({ nomeDocumento, nomeUsuario });
+
+                const usuariosNoDocumento =
+                    obterUsuariosDocumento(nomeDocumento);
+
+                io.to(nomeDocumento).emit(
+                    "usuarios_no_documento",
+                    usuariosNoDocumento
+                );
+
+                devolverTexto(documento.texto);
+            }
         }
-    });
+    );
 
     socket.on("texto_editor", async ({ texto, nomeDocumento }) => {
         const atualizacao = await atualizaDocumento(nomeDocumento, texto);
@@ -32,4 +49,4 @@ function registrarEventosDocumentos(socket, io) {
     });
 }
 
-export default registrarEventosDocumentos;
+export default registrarEventosDocumento;
